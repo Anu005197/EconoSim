@@ -23,35 +23,6 @@ function simulateEconomy() {
     economy.unemployment -= 0.1; // Decrease unemployment by 0.1%
 }
 
-// Setup Chart.js
-const ctx = document.getElementById('economicChart').getContext('2d');
-const economicChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: [0],
-        datasets: [{
-            label: 'GDP',
-            data: [economy.gdp],
-            borderColor: 'green',
-            fill: false,
-        }, {
-            label: 'Inflation',
-            data: [economy.inflation],
-            borderColor: 'red',
-            fill: false,
-        }]
-    }
-});
-
-// Update chart data
-function updateChart() {
-    const time = economicChart.data.labels.length;
-    economicChart.data.labels.push(time);
-    economicChart.data.datasets[0].data.push(economy.gdp);
-    economicChart.data.datasets[1].data.push(economy.inflation);
-    economicChart.update();
-}
-
 // Button Event Listeners
 document.getElementById('increaseInflation').addEventListener('click', () => {
     economy.inflation += 1; // Increase inflation by 1%
@@ -67,5 +38,4 @@ document.getElementById('increaseInvestment').addEventListener('click', () => {
 setInterval(() => {
     simulateEconomy();
     updateDashboard();
-    updateChart();
 }, 1000); // Update every second
