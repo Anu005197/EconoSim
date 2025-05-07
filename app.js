@@ -1,7 +1,7 @@
 // Initial economy state
 let economy = {
     gdp: 1000000,
-    inflation: 2,
+    inflation: 5, // Start inflation at 5% for better visibility
     unemployment: 5,
     businessSector: 100000,
     governmentDebt: 50000,
@@ -27,12 +27,24 @@ const economicChart = new Chart(ctx, {
             data: [economy.gdp],
             borderColor: 'green',
             fill: false,
+            tension: 0.1,  // Smooth the curve
         }, {
             label: 'Inflation',
             data: [economy.inflation],
             borderColor: 'red',
             fill: false,
+            tension: 0.1,  // Smooth the curve
         }]
+    },
+    options: {
+        scales: {
+            y: {
+                ticks: {
+                    beginAtZero: true,
+                    max: Math.max(economy.gdp, economy.inflation) * 1.1,  // Scale max dynamically
+                }
+            }
+        }
     }
 });
 
@@ -48,7 +60,7 @@ function updateChart() {
 // Simulate economic changes
 function simulateEconomy() {
     economy.gdp *= 1.02; // Simulate 2% GDP growth
-    economy.inflation += 0.1; // Increase inflation by 0.1%
+    economy.inflation += 0.5; // Increase inflation by 0.5% (increase this value)
     economy.unemployment -= 0.1; // Decrease unemployment by 0.1%
 }
 
