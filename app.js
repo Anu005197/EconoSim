@@ -50,10 +50,17 @@ const economicChart = new Chart(ctx, {
 
 // Update chart data
 function updateChart() {
+    // Check if the chart data is being updated
+    console.log("Updating chart data...");
+    
     const time = economicChart.data.labels.length;
-    economicChart.data.labels.push(time);
+    economicChart.data.labels.push(time); // Add new time label
+
+    // Add the new values for GDP and Inflation to the chart data
     economicChart.data.datasets[0].data.push(economy.gdp);
     economicChart.data.datasets[1].data.push(economy.inflation);
+
+    // Update the chart to reflect new data
     economicChart.update();
 }
 
@@ -68,23 +75,26 @@ function simulateEconomy() {
 document.getElementById('simulateEconomy').addEventListener('click', () => {
     simulateEconomy();
     updateDashboard();
-    updateChart();
+    updateChart(); // Update the chart after simulating economy
 });
 
 // Interactive Sliders
 document.getElementById('inflationSlider').addEventListener('input', (e) => {
     economy.inflation = parseFloat(e.target.value);
     updateDashboard();
+    updateChart(); // Update the chart when inflation is adjusted
 });
 
 document.getElementById('businessSlider').addEventListener('input', (e) => {
     economy.businessSector = parseFloat(e.target.value);
     updateDashboard();
+    updateChart(); // Update the chart when business sector is adjusted
 });
 
 document.getElementById('debtSlider').addEventListener('input', (e) => {
     economy.governmentDebt = parseFloat(e.target.value);
     updateDashboard();
+    updateChart(); // Update the chart when government debt is adjusted
 });
 
 // Initial Dashboard Update
