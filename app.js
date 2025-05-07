@@ -16,13 +16,6 @@ function updateDashboard() {
     document.getElementById('governmentDebt').textContent = economy.governmentDebt.toFixed(0);
 }
 
-// Simulate economic changes
-function simulateEconomy() {
-    economy.gdp *= 1.02; // Simulate 2% GDP growth
-    economy.inflation += 0.1; // Increase inflation by 0.1%
-    economy.unemployment -= 0.1; // Decrease unemployment by 0.1%
-}
-
 // Setup Chart.js
 const ctx = document.getElementById('economicChart').getContext('2d');
 const economicChart = new Chart(ctx, {
@@ -52,20 +45,35 @@ function updateChart() {
     economicChart.update();
 }
 
-// Button Event Listeners
-document.getElementById('increaseInflation').addEventListener('click', () => {
-    economy.inflation += 1; // Increase inflation by 1%
-    updateDashboard();
-});
+// Simulate economic changes
+function simulateEconomy() {
+    economy.gdp *= 1.02; // Simulate 2% GDP growth
+    economy.inflation += 0.1; // Increase inflation by 0.1%
+    economy.unemployment -= 0.1; // Decrease unemployment by 0.1%
+}
 
-document.getElementById('increaseInvestment').addEventListener('click', () => {
-    economy.businessSector += 50000; // Increase business sector by 50,000
-    updateDashboard();
-});
-
-// Simulate changes over time
-setInterval(() => {
+// Button Event Listener for Simulate Economy
+document.getElementById('simulateEconomy').addEventListener('click', () => {
     simulateEconomy();
     updateDashboard();
     updateChart();
-}, 1000); // Update every second
+});
+
+// Interactive Sliders
+document.getElementById('inflationSlider').addEventListener('input', (e) => {
+    economy.inflation = parseFloat(e.target.value);
+    updateDashboard();
+});
+
+document.getElementById('businessSlider').addEventListener('input', (e) => {
+    economy.businessSector = parseFloat(e.target.value);
+    updateDashboard();
+});
+
+document.getElementById('debtSlider').addEventListener('input', (e) => {
+    economy.governmentDebt = parseFloat(e.target.value);
+    updateDashboard();
+});
+
+// Initial Dashboard Update
+updateDashboard();

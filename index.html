@@ -11,7 +11,7 @@
     <div class="container">
         <header>
             <h1>Economics Simulator</h1>
-            <p>Build and manage your own economy in this interactive game, learning financial principles while shaping a virtual world.</p>
+            <p>Manage and shape a virtual economy. Make informed decisions and watch how they affect GDP, inflation, and more.</p>
         </header>
 
         <div class="dashboard">
@@ -21,22 +21,24 @@
             </div>
             <div class="dashboard-item">
                 <strong>Inflation Rate:</strong> <span id="inflation">2%</span>
+                <input type="range" id="inflationSlider" min="1" max="20" value="2">
             </div>
             <div class="dashboard-item">
                 <strong>Unemployment Rate:</strong> <span id="unemployment">5%</span>
             </div>
             <div class="dashboard-item">
                 <strong>Business Sector:</strong> <span id="businessSector">100,000</span>
+                <input type="range" id="businessSlider" min="100000" max="1000000" value="100000">
             </div>
             <div class="dashboard-item">
                 <strong>Government Debt:</strong> <span id="governmentDebt">50,000</span>
+                <input type="range" id="debtSlider" min="50000" max="500000" value="50000">
             </div>
         </div>
 
         <div class="controls">
             <h2>Decision Panel</h2>
-            <button id="increaseInflation">Increase Inflation by 1%</button>
-            <button id="increaseInvestment">Increase Business Sector by 50,000</button>
+            <button id="simulateEconomy">Simulate Economy</button>
         </div>
 
         <div class="chart-container">

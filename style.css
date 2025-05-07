@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #f8f9fa;
+    background-color: #f0f0f0;
     color: #333;
     display: flex;
     justify-content: center;
@@ -23,11 +23,12 @@ body {
 header {
     text-align: center;
     margin-bottom: 40px;
+    color: #4CAF50;
+    animation: fadeIn 2s ease-in-out;
 }
 
 header h1 {
     font-size: 36px;
-    color: #4CAF50;
 }
 
 header p {
@@ -38,10 +39,11 @@ header p {
 /* Dashboard styles */
 .dashboard {
     background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
+    animation: slideIn 1s ease-out;
 }
 
 .dashboard h2 {
@@ -50,13 +52,37 @@ header p {
 }
 
 .dashboard-item {
-    margin: 15px 0;
+    margin: 20px 0;
     font-size: 18px;
     color: #333;
 }
 
 .dashboard-item strong {
     color: #4CAF50;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-top: 10px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 /* Controls panel styles */
@@ -69,10 +95,6 @@ header p {
     text-align: center;
 }
 
-.controls h2 {
-    margin-bottom: 20px;
-}
-
 button {
     background-color: #4CAF50;
     color: white;
@@ -81,16 +103,11 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 10px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease-in-out;
 }
 
 button:hover {
     background-color: #45a049;
-}
-
-button:focus {
-    outline: none;
 }
 
 /* Chart container */
@@ -99,4 +116,23 @@ button:focus {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
