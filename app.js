@@ -21,16 +21,16 @@ const ctx = document.getElementById('economicChart').getContext('2d');
 const economicChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [0],
+        labels: [0], // Start with time label 0
         datasets: [{
             label: 'GDP',
-            data: [economy.gdp],
+            data: [economy.gdp], // Initial GDP data
             borderColor: 'green',
             fill: false,
             tension: 0.1,  // Smooth the curve
         }, {
             label: 'Inflation',
-            data: [economy.inflation],
+            data: [economy.inflation], // Initial Inflation data
             borderColor: 'red',
             fill: false,
             tension: 0.1,  // Smooth the curve
@@ -41,7 +41,7 @@ const economicChart = new Chart(ctx, {
             y: {
                 ticks: {
                     beginAtZero: true,
-                    max: Math.max(economy.gdp, economy.inflation) * 1.1,  // Scale max dynamically
+                    max: Math.max(economy.gdp, economy.inflation) * 1.1,  // Dynamically scale the y-axis
                 }
             }
         }
@@ -50,24 +50,21 @@ const economicChart = new Chart(ctx, {
 
 // Update chart data
 function updateChart() {
-    // Check if the chart data is being updated
-    console.log("Updating chart data...");
-    
     const time = economicChart.data.labels.length;
-    economicChart.data.labels.push(time); // Add new time label
+    economicChart.data.labels.push(time); // Add new time label for x-axis
 
-    // Add the new values for GDP and Inflation to the chart data
+    // Add new data for GDP and Inflation
     economicChart.data.datasets[0].data.push(economy.gdp);
     economicChart.data.datasets[1].data.push(economy.inflation);
 
-    // Update the chart to reflect new data
+    // Update the chart to reflect the new data
     economicChart.update();
 }
 
-// Simulate economic changes
+// Simulate economic changes (simulate 2% GDP growth and inflation increase)
 function simulateEconomy() {
     economy.gdp *= 1.02; // Simulate 2% GDP growth
-    economy.inflation += 0.5; // Increase inflation by 0.5% (increase this value)
+    economy.inflation += 0.5; // Increase inflation by 0.5%
     economy.unemployment -= 0.1; // Decrease unemployment by 0.1%
 }
 
@@ -75,26 +72,26 @@ function simulateEconomy() {
 document.getElementById('simulateEconomy').addEventListener('click', () => {
     simulateEconomy();
     updateDashboard();
-    updateChart(); // Update the chart after simulating economy
+    updateChart(); // Update chart after simulating the economy
 });
 
-// Interactive Sliders
+// Interactive Sliders for Inflation, Business Sector, and Debt
 document.getElementById('inflationSlider').addEventListener('input', (e) => {
     economy.inflation = parseFloat(e.target.value);
     updateDashboard();
-    updateChart(); // Update the chart when inflation is adjusted
+    updateChart(); // Update the chart after adjusting inflation
 });
 
 document.getElementById('businessSlider').addEventListener('input', (e) => {
     economy.businessSector = parseFloat(e.target.value);
     updateDashboard();
-    updateChart(); // Update the chart when business sector is adjusted
+    updateChart(); // Update the chart after adjusting business sector
 });
 
 document.getElementById('debtSlider').addEventListener('input', (e) => {
     economy.governmentDebt = parseFloat(e.target.value);
     updateDashboard();
-    updateChart(); // Update the chart when government debt is adjusted
+    updateChart(); // Update the chart after adjusting government debt
 });
 
 // Initial Dashboard Update
