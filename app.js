@@ -9,11 +9,11 @@ let economy = {
 
 // Update the Dashboard UI with the current economy state
 function updateDashboard() {
-    document.getElementById('gdp').textContent = `GDP: ${economy.gdp}`;
-    document.getElementById('inflation').textContent = `Inflation: ${economy.inflation}%`;
-    document.getElementById('unemployment').textContent = `Unemployment: ${economy.unemployment}%`;
-    document.getElementById('businessSector').textContent = `Business Sector: ${economy.businessSector}`;
-    document.getElementById('governmentDebt').textContent = `Government Debt: ${economy.governmentDebt}`;
+    document.getElementById('gdp').textContent = economy.gdp.toFixed(0);
+    document.getElementById('inflation').textContent = economy.inflation.toFixed(2) + "%";
+    document.getElementById('unemployment').textContent = economy.unemployment.toFixed(2) + "%";
+    document.getElementById('businessSector').textContent = economy.businessSector.toFixed(0);
+    document.getElementById('governmentDebt').textContent = economy.governmentDebt.toFixed(0);
 }
 
 // Simulate economic changes
@@ -21,6 +21,35 @@ function simulateEconomy() {
     economy.gdp *= 1.02; // Simulate 2% GDP growth
     economy.inflation += 0.1; // Increase inflation by 0.1%
     economy.unemployment -= 0.1; // Decrease unemployment by 0.1%
+}
+
+// Setup Chart.js
+const ctx = document.getElementById('economicChart').getContext('2d');
+const economicChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [0],
+        datasets: [{
+            label: 'GDP',
+            data: [economy.gdp],
+            borderColor: 'green',
+            fill: false,
+        }, {
+            label: 'Inflation',
+            data: [economy.inflation],
+            borderColor: 'red',
+            fill: false,
+        }]
+    }
+});
+
+// Update chart data
+function updateChart() {
+    const time = economicChart.data.labels.length;
+    economicChart.data.labels.push(time);
+    economicChart.data.datasets[0].data.push(economy.gdp);
+    economicChart.data.datasets[1].data.push(economy.inflation);
+    economicChart.update();
 }
 
 // Button Event Listeners
@@ -38,4 +67,5 @@ document.getElementById('increaseInvestment').addEventListener('click', () => {
 setInterval(() => {
     simulateEconomy();
     updateDashboard();
+    updateChart();
 }, 1000); // Update every second

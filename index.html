@@ -4,30 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Economics Simulator</title>
-    <!-- Link to style.css -->
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Link to Chart.js -->
 </head>
 <body>
     <div class="container">
-        <h1>Economics Simulator</h1>
+        <header>
+            <h1>Economics Simulator</h1>
+            <p>Build and manage your own economy in this interactive game, learning financial principles while shaping a virtual world.</p>
+        </header>
 
         <div class="dashboard">
             <h2>Economy Dashboard</h2>
-            <p id="gdp">GDP: 1000000</p>
-            <p id="inflation">Inflation: 2%</p>
-            <p id="unemployment">Unemployment: 5%</p>
-            <p id="businessSector">Business Sector: 100000</p>
-            <p id="governmentDebt">Government Debt: 50000</p>
+            <div class="dashboard-item">
+                <strong>GDP:</strong> <span id="gdp">1,000,000</span>
+            </div>
+            <div class="dashboard-item">
+                <strong>Inflation Rate:</strong> <span id="inflation">2%</span>
+            </div>
+            <div class="dashboard-item">
+                <strong>Unemployment Rate:</strong> <span id="unemployment">5%</span>
+            </div>
+            <div class="dashboard-item">
+                <strong>Business Sector:</strong> <span id="businessSector">100,000</span>
+            </div>
+            <div class="dashboard-item">
+                <strong>Government Debt:</strong> <span id="governmentDebt">50,000</span>
+            </div>
         </div>
 
         <div class="controls">
             <h2>Decision Panel</h2>
-            <button id="increaseInflation">Increase Inflation</button>
-            <button id="increaseInvestment">Increase Investment</button>
+            <button id="increaseInflation">Increase Inflation by 1%</button>
+            <button id="increaseInvestment">Increase Business Sector by 50,000</button>
+        </div>
+
+        <div class="chart-container">
+            <h2>Economic Trends</h2>
+            <canvas id="economicChart"></canvas>
         </div>
     </div>
 
-    <!-- Link to app.js -->
     <script src="app.js"></script>
 </body>
 </html>
